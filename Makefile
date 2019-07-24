@@ -30,14 +30,17 @@ deb-datagrid:
 .PHONY: pushalp
 pushalp:
 	$(eval export DOCKER_TAG := alpine)
+	docker push $$DOCKER_REPO:$$DOCKER_TAG
 	hooks/post_push
 
 .PHONY: pushdeb
 pushdeb:
 	$(eval export DOCKER_TAG := deb)
+	docker push $$DOCKER_REPO:$$DOCKER_TAG
 	hooks/post_push
 
 .PHONY: pushldg
 pushldg:
 	$(eval export DOCKER_TAG := deb-datagrid)
+	docker push $$DOCKER_REPO:$$DOCKER_TAG
 	hooks/post_push
