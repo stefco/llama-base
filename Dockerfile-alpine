@@ -52,7 +52,17 @@ RUN cat /new-docker-meta.yml >>/docker-meta.yml \
 # __curl function taken from:
 # https://unix.stackexchange.com/questions/83926/how-to-download-a-file-using-just-bash-and-nothing-else-no-curl-wget-perl-et
 RUN adduser --disabled-password --gecos "" llama \
-        && apk --no-cache add bash curl bzip2 \
+        && apk --no-cache add \
+            bash \
+            curl \
+            bzip2 \
+            vim \
+            git \
+            font-bitstream-type1 \
+            graphviz \
+            htop \
+            ncdu \
+            openssh \
         && chown -R llama:llama /home/llama \
         && su llama -c " \
             cd ~ \

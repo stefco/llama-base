@@ -51,7 +51,16 @@ RUN cat /new-docker-meta.yml >>/docker-meta.yml \
 RUN bash -c ' \
     adduser --disabled-password --gecos "" llama \
         && apt-get -y update \
-        && apt-get install -y --no-install-recommends ca-certificates curl bzip2 \
+        && apt-get install -y --no-install-recommends \
+            ca-certificates \
+            curl \
+            bzip2 \
+            vim \
+            git \
+            graphviz \
+            htop \
+            ncdu \
+            ssh-client \
         && rm -rf /var/lib/apt/lists/* \
         && chown -R llama:llama /home/llama \
         && su llama --login --command " \
