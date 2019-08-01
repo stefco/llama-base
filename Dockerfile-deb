@@ -52,6 +52,8 @@ RUN bash -c ' \
     adduser --disabled-password --gecos "" llama \
         && apt-get -y update \
         && apt-get install -y --no-install-recommends \
+            psmisc \
+            procps \
             ca-certificates \
             curl \
             bzip2 \
@@ -61,6 +63,13 @@ RUN bash -c ' \
             htop \
             ncdu \
             ssh-client \
+        && echo "Installing LIGO DataGrid." \
+        || exit 1 \
+    v=1; \
+    until [ $v -eq 0 ]; do \
+        curl https://www.lsc-group.phys.uwm.edu/lscdatagrid/doc/ldg-client.sh | bash; \
+        v=$?; \
+    done \
         && rm -rf /var/lib/apt/lists/* \
         && chown -R llama:llama /home/llama \
         && su llama --login --command " \
