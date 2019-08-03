@@ -63,6 +63,8 @@ RUN adduser --disabled-password --gecos "" llama \
             htop \
             ncdu \
             openssh \
+            nodejs \
+            npm \
         && chown -R llama:llama /home/llama \
         && su llama -c " \
             cd ~ \

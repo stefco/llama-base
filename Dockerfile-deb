@@ -70,6 +70,9 @@ RUN bash -c ' \
         curl https://www.lsc-group.phys.uwm.edu/lscdatagrid/doc/ldg-client.sh | bash; \
         v=$?; \
     done \
+        && echo "Installing nodejs" \
+        && curl -sL https://deb.nodesource.com/setup_10.x | bash - \
+        && apt-get install -y nodejs \
         && rm -rf /var/lib/apt/lists/* \
         && chown -R llama:llama /home/llama \
         && su llama --login --command " \
