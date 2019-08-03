@@ -82,6 +82,8 @@ RUN bash -c ' \
                 && /home/llama/miniconda3/bin/conda config --add channels conda-forge \
                 && /home/llama/miniconda3/bin/conda init bash \
                 && rm -r ~/miniconda3/pkgs \
+                && git config --global user.name LLAMA \
+                && git config --global user.email placeholder \
         " \
     ; \
 '
