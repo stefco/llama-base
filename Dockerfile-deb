@@ -63,6 +63,7 @@ RUN bash -c ' \
             htop \
             ncdu \
             ssh-client \
+            certbot \
         && echo "Installing LIGO DataGrid." \
         || exit 1 \
     v=1; \
