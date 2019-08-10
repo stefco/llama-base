@@ -80,7 +80,7 @@ RUN apt-get -y update \
     && /opt/anaconda/bin/conda update conda \
     && /opt/anaconda/bin/conda update --all \
     && /opt/anaconda/bin/conda config --add channels conda-forge \
-    && echo 'export PATH=/opt/anaconda/bin:"$PATH"' >/etc/profile.d/conda.sh
+    && echo 'export PATH=/opt/anaconda/bin:"$PATH"' >/etc/profile.d/conda.sh \
     && rm -r ~/miniconda3/pkgs \
     && git config --global user.name LLAMA \
     && git config --global user.email placeholder \
