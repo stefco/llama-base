@@ -69,7 +69,7 @@ RUN apk --no-cache add \
     && /opt/anaconda/bin/conda update --all \
     && /opt/anaconda/bin/conda config --add channels conda-forge \
     && echo 'export PATH=/opt/anaconda/bin:"$PATH"' >/etc/profile.d/conda.sh \
-    && rm -r ~/miniconda3/pkgs \
+    && rm -r /opt/anaconda/pkgs \
     && git config --global user.name LLAMA \
     && git config --global user.email placeholder \
 
