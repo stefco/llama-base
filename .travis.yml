@@ -11,9 +11,11 @@ services:
 install:
   - make $TARGET
 deploy:
+  - docker login -u $DOCKER_CLOUD_USER -p $DOCKER_CLOUD_PASSWORD
   - |
     if [ -z "$TRAVIS_TAG" ]; then
         echo "No tag, not deploying."
     else
         echo "Tag: $TRAVIS_TAG"
         make push$TARGET
+    fi
