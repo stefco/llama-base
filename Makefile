@@ -7,21 +7,21 @@ help:
 	@echo "  help           show this message"
 	@echo "  alpine         Docker Cloud-style llama alpine image build"
 	@echo "  deb            Docker Cloud-style llama debian image build"
-	@echo "  pushalp        docker push the alpine image"
+	@echo "  pushalpine     docker push the alpine image"
 	@echo "  pushdeb        docker push the debian image"
 
 .PHONY: alpine
 alpine:
 	$(eval export DOCKER_TAG := alpine)
-	hooks/build --squash
+	hooks/build # --squash
 
 .PHONY: deb
 deb:
 	$(eval export DOCKER_TAG := deb)
-	hooks/build --squash
+	hooks/build # --squash
 
-.PHONY: pushalp
-pushalp:
+.PHONY: pushalpine
+pushalpine:
 	$(eval export DOCKER_TAG := alpine)
 	docker push $$DOCKER_REPO:$$DOCKER_TAG
 	hooks/post_push
@@ -31,3 +31,5 @@ pushdeb:
 	$(eval export DOCKER_TAG := deb)
 	docker push $$DOCKER_REPO:$$DOCKER_TAG
 	hooks/post_push
+	docker tag $$DOCKER_REPO:$$DOCKER_TAG $$DOCKER_REPO:latest
+	docker push $$DOCKER_REPO:latest

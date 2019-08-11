@@ -1,0 +1,19 @@
+language: python
+env:
+  matrix:
+    - TARGET=deb
+    - TARGET=alpine
+  global:
+    - DOCKER_REPO=$TRAVIS_REPO_SLUG
+    - DOCKERFILE_PATH=Dockerfile-$TARGET
+services:
+  - docker
+install:
+  - make $TARGET
+deploy:
+  - |
+    if [ -z "$TRAVIS_TAG" ]; then
+        echo "No tag, not deploying."
+    else
+        echo "Tag: $TRAVIS_TAG"
+        make push$TARGET
