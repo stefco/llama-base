@@ -10,7 +10,6 @@ services:
   - docker
 install:
   - make $TARGET
-deploy:
   - docker login -u $DOCKER_CLOUD_USER -p $DOCKER_CLOUD_PASSWORD
   - |
     if [ -z "$TRAVIS_TAG" ]; then
