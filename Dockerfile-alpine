@@ -76,4 +76,6 @@ RUN apk --no-cache add \
             && git config --global user.email "NA" \
     '
 
+ENV ENV=/etc/profile.d/conda.sh
+ENV PATH=/opt/anaconda/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 SHELL ["sh", "-l", "-c"]
