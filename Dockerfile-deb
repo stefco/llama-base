@@ -88,3 +88,4 @@ RUN apt-get -y update \
     '
 
 ENTRYPOINT ["sh", "-l", "-c"]
+CMD ["sh", "-i"]
