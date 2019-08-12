@@ -12,6 +12,5 @@ install:
   - if [ -z "$TRAVIS_TAG" ]; then echo "Not a tag, exiting" && exit 0; fi
   - make $TARGET
   - |
-    echo "$DOCKER_CLOUD_PASSWORD" \
-        | docker login -u "$DOCKER_CLOUD_USER" --password-stdin
+    echo "$DOCKER_USER" | docker login -u "$DOCKER_PASS" --password-stdin
   - make push$TARGET
