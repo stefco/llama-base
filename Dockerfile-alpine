@@ -76,4 +76,5 @@ RUN apk --no-cache add \
     '
 
 ENTRYPOINT ["sh", "-l", "-c"]
+SHELL ["sh", "-l", "-c"]
 CMD ["sh", "-i"]
