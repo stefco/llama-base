@@ -75,4 +75,5 @@ RUN apk --no-cache add \
             && git config --global user.email "NA" \
     '
 
+ENV ENV=/etc/profile.d/conda.sh
 SHELL ["sh", "-l", "-c"]

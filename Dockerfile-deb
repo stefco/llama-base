@@ -87,4 +87,5 @@ RUN apt-get -y update \
             && git config --global user.email "NA" \
     '
 
+ENV ENV=/etc/profile.d/conda.sh
 SHELL ["sh", "-l", "-c"]
