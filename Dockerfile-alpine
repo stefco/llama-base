@@ -49,6 +49,7 @@ RUN cat /etc/new-docker-meta.yml >>/etc/docker-meta.yml \
 #------------------------------------------------------------------------------
 
 RUN apk --no-cache add \
+        man \
         bash \
         curl \
         bzip2 \
@@ -75,5 +76,4 @@ RUN apk --no-cache add \
             && git config --global user.email "NA" \
     '
 
-ENV ENV=/etc/profile.d/conda.sh
 SHELL ["sh", "-l", "-c"]
