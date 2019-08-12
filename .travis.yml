@@ -13,3 +13,4 @@ install:
   - make $TARGET
   - echo "$DOCKER_PASS" | docker login -u "$DOCKER_USER" --password-stdin
   - make push$TARGET
+  - echo "Build finished successfully." && exit 0
