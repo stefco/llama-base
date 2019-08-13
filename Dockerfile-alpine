@@ -75,6 +75,6 @@ RUN apk --no-cache add \
             && git config --global user.email "NA" \
     '
 
-ENTRYPOINT ["sh", "-l", "-c", "\"@\"", "--"]
+ENTRYPOINT ["sh", "-l", "-c", "\"$@\"", "--"]
 SHELL ["sh", "-l", "-c"]
 CMD ["sh", "-i"]
