@@ -81,7 +81,7 @@ RUN apt-get -y update \
     && /opt/anaconda/bin/conda update --all \
     && /opt/anaconda/bin/conda config --add channels conda-forge \
     && echo 'export PATH=/opt/anaconda/bin:"$PATH"' >/etc/profile.d/conda.sh \
-    && /opt/anaconda/conda clean -y --all \
+    && /opt/anaconda/bin/conda clean -y --all \
     && sh -l -c ' \
         git config --global user.name "LLAMA Docker Image" \
             && git config --global user.email "NA" \
