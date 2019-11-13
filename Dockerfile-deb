@@ -49,6 +49,7 @@ RUN cat /etc/new-docker-meta.yml >>/etc/docker-meta.yml \
 
 RUN apt-get -y update \
     && apt-get install -y --no-install-recommends \
+        texlive \
         psmisc \
         procps \
         ca-certificates \
