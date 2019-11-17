@@ -62,13 +62,25 @@ RUN apt-get -y update \
         ncdu \
         ssh-client \
         certbot \
+    && echo Fetching LIGO DataGrid install script... \
+    && curl \
+        -o /root/ldg-client.sh \
+        https://www.lsc-group.phys.uwm.edu/lscdatagrid/doc/ldg-client.sh \
+    && echo 'ldg-client.sh contents:' \
+    && cat /root/ldg-client.sh \
     && echo Installing LIGO DataGrid \
-    || exit 1 \
-    bash -c ' \
+    && bash -c ' \
         v=1; \
+        count=1; \
         until [ $v -eq 0 ]; do \
-            curl https://www.lsc-group.phys.uwm.edu/lscdatagrid/doc/ldg-client.sh | bash; \
+            if [ $count -gt 5 ]; then \
+                echo "FIVE FAILED LDG INSTALL ATTEMPTS. GIVING UP!"; \
+                exit 1; \
+            fi; \
+            echo "LDG INSTALLATION ATTEMPT: $count"; \
+            bash /root/ldg-client.sh; \
             v=$?; \
+            count=$((count+1)); \
         done \
     ' \
     && echo Installing nodejs \
