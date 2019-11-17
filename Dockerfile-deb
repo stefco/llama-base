@@ -47,6 +47,7 @@ RUN cat /etc/new-docker-meta.yml >>/etc/docker-meta.yml \
 # END APPEND /etc/docker-meta.yml
 #------------------------------------------------------------------------------
 
+# Note that Apache a2enmod is deb only, as is LDG.
 RUN apt-get -y update \
     && apt-get install -y --no-install-recommends \
         texlive \
@@ -62,6 +63,10 @@ RUN apt-get -y update \
         ncdu \
         ssh-client \
         certbot \
+        apache2 \
+        libapache2-mod-wsgi \
+    && echo Enabling mod-wsgi... \
+    && a2enmod wsgi \
     && echo Fetching LIGO DataGrid install script... \
     && curl \
         -o /root/ldg-client.sh \
