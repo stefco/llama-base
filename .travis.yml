@@ -2,7 +2,6 @@ language: python
 env:
   matrix:
     - TARGET=deb
-    - TARGET=alpine
 services:
   - docker
 install:
