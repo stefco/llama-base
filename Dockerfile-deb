@@ -63,10 +63,6 @@ RUN apt-get -y update \
         ncdu \
         ssh-client \
         certbot \
-        apache2 \
-        libapache2-mod-wsgi \
-    && echo Enabling mod-wsgi... \
-    && a2enmod wsgi \
     && echo Fetching LIGO DataGrid install script... \
     && curl \
         -o /root/ldg-client.sh \
