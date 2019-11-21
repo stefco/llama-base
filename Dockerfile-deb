@@ -39,6 +39,9 @@ FROM debian:stretch-20191014-slim
 
 #------------------------------------------------------------------------------
 # APPEND /etc/docker-meta.yml
+ENV XDG_DATA_HOME=/root/.local/share
+ENV XDG_CACHE_HOME=/root/.cache
+ENV XDG_CONFIG_HOME=/root/.config
 COPY --from=meta /etc/docker-meta.yml /etc/new-docker-meta.yml
 RUN cat /etc/new-docker-meta.yml >>/etc/docker-meta.yml \
     && echo Full meta: \
