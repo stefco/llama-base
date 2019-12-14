@@ -64,6 +64,7 @@ RUN apt-get -y update \
         htop \
         ncdu \
         ssh-client \
+        libgraph-easy-perl \
         certbot \
     && echo Fetching LIGO DataGrid install script... \
     && curl \
