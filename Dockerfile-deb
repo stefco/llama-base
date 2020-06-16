@@ -92,6 +92,7 @@ RUN apt-get -y update \
     && bash ~/miniconda.sh -b -f -p /opt/anaconda \
     && rm ~/miniconda.sh \
     && /opt/anaconda/bin/conda update conda \
+    && /opt/anaconda/bin/conda config --set channel_priority strict
     && /opt/anaconda/bin/conda update --all \
     && /opt/anaconda/bin/conda config --add channels conda-forge \
     && echo 'export PATH=/opt/anaconda/bin:"$PATH"' >/etc/profile.d/conda.sh \
