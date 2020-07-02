@@ -69,7 +69,7 @@ RUN apt-get -y update \
     && echo Fetching LIGO DataGrid install script... \
     && curl \
         -o /root/ldg-client.sh \
-        https://www.lsc-group.phys.uwm.edu/lscdatagrid/doc/ldg-client.sh \
+        https://computing.docs.ligo.org/lscdatagridweb/doc/ldg-client.sh \
     && echo 'ldg-client.sh contents:' \
     && cat /root/ldg-client.sh \
     && echo Installing LIGO DataGrid \
