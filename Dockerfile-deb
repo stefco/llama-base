@@ -35,7 +35,8 @@ RUN echo >>/etc/docker-meta.yml "- name: ${NAME}" \
 # END CREATE /etc/docker-meta.yml
 #------------------------------------------------------------------------------
 
-FROM debian:buster-20200607-slim
+#FROM debian:buster-20200607-slim
+FROM continuumio/miniconda3
 
 #------------------------------------------------------------------------------
 # APPEND /etc/docker-meta.yml
@@ -98,21 +99,28 @@ RUN apt-get -y update \
         done \
     ' \
     && rm -rf /var/lib/apt/lists/* \
-    && curl https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh >~/anaconda.sh \
-    && head -50 ~/anaconda.sh \
-    && bash ~/anaconda.sh -b -f -p /opt/anaconda \
-    && rm ~/anaconda.sh \
-    && /opt/anaconda/bin/conda update conda \
-    && /opt/anaconda/bin/conda config --set channel_priority strict \
-    && /opt/anaconda/bin/conda update --all \
-    && /opt/anaconda/bin/conda config --add channels conda-forge \
-    && echo 'export PATH=/opt/anaconda/bin:"$PATH"' >/etc/profile.d/conda.sh \
-    && /opt/anaconda/bin/conda clean -y --all \
     && printf '\nset -o vi\n' >>/root/.bashrc \
     && sh -l -c ' \
         git config --global user.name "LLAMA Docker Image" \
             && git config --global user.email "NA" \
     '
+
+#------------------------------------------------------------------------------
+# BASE DEBIAN CONDA SETUP; put this back in if continuum image gives trouble
+#
+#     && curl https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh >~/anaconda.sh \
+#     && head -50 ~/anaconda.sh \
+#     && bash ~/anaconda.sh -b -f -p /opt/anaconda \
+#     && rm ~/anaconda.sh \
+#     && /opt/anaconda/bin/conda update conda \
+#     && /opt/anaconda/bin/conda config --set channel_priority strict \
+#     && /opt/anaconda/bin/conda update --all \
+#     && /opt/anaconda/bin/conda config --add channels conda-forge \
+#     && echo 'export PATH=/opt/anaconda/bin:"$PATH"' >/etc/profile.d/conda.sh \
+#     && /opt/anaconda/bin/conda clean -y --all \
+#
+# END BASE DEBIAN CONDA SETUP
+#------------------------------------------------------------------------------
 
 ENTRYPOINT ["sh", "-l", "-c", "\"$@\"", "--"]
 SHELL ["sh", "-l", "-c"]
