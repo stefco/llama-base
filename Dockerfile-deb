@@ -52,6 +52,11 @@ RUN cat /etc/new-docker-meta.yml >>/etc/docker-meta.yml \
 #------------------------------------------------------------------------------
 
 RUN apt-get -y update \
+    && conda update conda \
+    && conda config --set channel_priority strict \
+    && conda update --all \
+    && conda config --add channels conda-forge \
+    && conda clean -y --all \
     && apt-get install -y --no-install-recommends \
         texlive \
         psmisc \
