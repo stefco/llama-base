@@ -9,6 +9,21 @@ help:
 	@echo "  deb            Docker Cloud-style llama debian image build"
 	@echo "  pushalpine     docker push the alpine image"
 	@echo "  pushdeb        docker push the debian image"
+	@echo "  bumppatch      bump version to next patch version (adds commit/tag)"
+	@echo "  bumpminor      bump version to next minor version (adds commit/tag)"
+	@echo "  bumpmajor      bump version to next major version (adds commit/tag)"
+
+.PHONY: bumpmajor
+bumpmajor:
+	bump2version major
+
+.PHONY: bumpminor
+bumpminor:
+	bump2version minor
+
+.PHONY: bumppatch
+bumppatch:
+	bump2version patch
 
 .PHONY: alpine
 alpine:
