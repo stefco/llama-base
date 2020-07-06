@@ -58,6 +58,7 @@ RUN apt-get -y update \
     && conda config --add channels conda-forge \
     && conda clean -y --all \
     && apt-get install -y --no-install-recommends \
+        certbot \
         texlive \
         psmisc \
         procps \
