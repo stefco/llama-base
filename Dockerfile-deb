@@ -36,7 +36,8 @@ RUN echo >>/etc/docker-meta.yml "- name: ${NAME}" \
 #------------------------------------------------------------------------------
 
 #FROM debian:buster-20200607-slim
-FROM continuumio/miniconda3
+# FROM continuumio/miniconda3
+FROM stefco/hpmoc-env
 
 #------------------------------------------------------------------------------
 # APPEND /etc/docker-meta.yml
