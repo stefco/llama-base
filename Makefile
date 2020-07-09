@@ -5,9 +5,7 @@ export DOCKERFILE_PATH = Dockerfile-$(DOCKER_TAG)
 help:
 	@echo "Please use \`make <target>\` where <target> is one of:"
 	@echo "  help           show this message"
-	@echo "  alpine         Docker Cloud-style llama alpine image build"
 	@echo "  deb            Docker Cloud-style llama debian image build"
-	@echo "  pushalpine     docker push the alpine image"
 	@echo "  pushdeb        docker push the debian image"
 	@echo "  bumppatch      bump version to next patch version (adds commit/tag)"
 	@echo "  bumpminor      bump version to next minor version (adds commit/tag)"
@@ -25,21 +23,21 @@ bumpminor:
 bumppatch:
 	bump2version patch
 
-.PHONY: alpine
-alpine:
-	$(eval export DOCKER_TAG := alpine)
-	hooks/build # --squash
+# .PHONY: alpine
+# alpine:
+# 	$(eval export DOCKER_TAG := alpine)
+# 	hooks/build # --squash
 
 .PHONY: deb
 deb:
 	$(eval export DOCKER_TAG := deb)
 	hooks/build # --squash
 
-.PHONY: pushalpine
-pushalpine:
-	$(eval export DOCKER_TAG := alpine)
-	docker push $$DOCKER_REPO:$$DOCKER_TAG
-	hooks/post_push
+# .PHONY: pushalpine
+# pushalpine:
+# 	$(eval export DOCKER_TAG := alpine)
+# 	docker push $$DOCKER_REPO:$$DOCKER_TAG
+# 	hooks/post_push
 
 .PHONY: pushdeb
 pushdeb:
