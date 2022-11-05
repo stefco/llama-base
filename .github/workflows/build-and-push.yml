@@ -43,10 +43,6 @@ jobs:
           tag_minor=$tag_major.$minor
           tag_patch=$tag_minor.$patch
           repo=${{ env.dockerhub_owner }}/${{ env.dockerhub_name }}
-          [[
-            ${{ env.latest_tag_python_minor_version }} = ${{ matrix.python_minor_version }}
-              && ${{ env.latest_tag_target }} = ${{ matrix.target }}
-          ]] && include_latest="$repo":$'latest\n'
           echo >> $GITHUB_ENV \
             llama_build_date="$(date -u +"%Y-%m-%dT%H:%M:%SZ")"
           echo >> $GITHUB_ENV llama_version_major=$major
@@ -65,7 +61,7 @@ jobs:
           file: ${{ env.dockerfile_path }}
           target: ${{ matrix.target }}
           tags: |
-            latest
+            ${{ env.dockerhub_repo }}:latest
             ${{ env.dockerhub_repo }}:${{ env.dockerhub_tag_major }}
             ${{ env.dockerhub_repo }}:${{ env.dockerhub_tag_minor }}
             ${{ env.dockerhub_repo }}:${{ env.dockerhub_tag_patch }}
@@ -78,4 +74,4 @@ jobs:
             REPO=${{ env.dockerhub_repo }}
             DOCKER_TAG=${{ env.dockerhub_tag_patch }}
             DOCKERFILE_PATH=${{ env.dockerfile_path }}
-            PYTHON_MINOR=${{ matrix.python_minor_version }}
+            PYTHON_MINOR=N/A
