@@ -20,7 +20,7 @@ jobs:
       latest_tag_target: llama-base
     strategy:
       matrix:
-        python_minor_version: [9, 10]
+        python_minor_version: [10]
         target: ['llama-base']
     steps:
       -
@@ -39,8 +39,7 @@ jobs:
         name: Set Environment Variables
         run: |
           read major minor patch rest <<<$(sed 's/\./ /g;s/[^0-9 ]//g' <<<'${{ github.ref_name }}')
-          tag_base=py3.${{ matrix.python_minor_version }}
-          tag_major=$tag_base-v$major
+          tag_major=$v$major
           tag_minor=$tag_major.$minor
           tag_patch=$tag_minor.$patch
           repo=${{ env.dockerhub_owner }}/${{ env.dockerhub_name }}
@@ -54,11 +53,6 @@ jobs:
           echo >> $GITHUB_ENV llama_version_minor=$minor
           echo >> $GITHUB_ENV llama_version_patch=$patch
           echo >> $GITHUB_ENV dockerhub_repo=$repo
-          echo >> $GITHUB_ENV dockerhub_tag_base=$tag_base
-          printf >> $GITHUB_ENV \
-            'dockerhub_full_tag_base_with_latest="%s%s"\n' \
-            "$include_latest" \
-            "$repo:$tag_base"
           echo >> $GITHUB_ENV dockerhub_tag_major=$tag_major
           echo >> $GITHUB_ENV dockerhub_tag_minor=$tag_minor
           echo >> $GITHUB_ENV dockerhub_tag_patch=$tag_patch
@@ -71,8 +65,7 @@ jobs:
           file: ${{ env.dockerfile_path }}
           target: ${{ matrix.target }}
           tags: |
-            ${{ env.dockerhub_full_tag_base_with_latest }}
-            ${{ env.dockerhub_repo }}:${{ env.dockerhub_tag_major }}
+            latest
             ${{ env.dockerhub_repo }}:${{ env.dockerhub_tag_major }}
             ${{ env.dockerhub_repo }}:${{ env.dockerhub_tag_minor }}
             ${{ env.dockerhub_repo }}:${{ env.dockerhub_tag_patch }}
@@ -83,6 +76,6 @@ jobs:
             URL=${{ github.repositoryUrl }}
             DATE=${{ env.llama_build_date }}
             REPO=${{ env.dockerhub_repo }}
-            DOCKER_TAG=${{ env.dockerhub_tag_base }}
+            DOCKER_TAG=${{ env.dockerhub_tag_patch }}
             DOCKERFILE_PATH=${{ env.dockerfile_path }}
             PYTHON_MINOR=${{ matrix.python_minor_version }}

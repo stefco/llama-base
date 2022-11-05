@@ -37,7 +37,7 @@ RUN echo >>/etc/docker-meta.yml "- name: ${NAME}" \
 
 #FROM debian:buster-20200607-slim
 # FROM continuumio/miniconda3
-FROM stefco/hpmoc-env AS llama-base
+FROM continuumio/miniconda3:latest AS llama-base
 
 #------------------------------------------------------------------------------
 # APPEND /etc/docker-meta.yml
@@ -52,12 +52,12 @@ RUN cat /etc/new-docker-meta.yml >>/etc/docker-meta.yml \
 # END APPEND /etc/docker-meta.yml
 #------------------------------------------------------------------------------
 
-RUN apt-get -y update \
-    && conda update conda \
+RUN conda update conda \
     && conda config --set channel_priority strict \
     && conda update --all \
     && conda config --add channels conda-forge \
-    && conda clean -y --all \
+    && conda clean -y --all
+RUN apt-get -y update \
     && apt-get install -y --no-install-recommends \
         xindy \
         certbot \
@@ -84,30 +84,8 @@ RUN apt-get -y update \
         libxcomposite1 \
         libasound2 \
         libxi6 \
-        libxtst6 \
-    && echo Fetching LIGO DataGrid install script... \
-    && curl \
-        -o /root/ldg-client.sh \
-        https://computing.docs.ligo.org/lscdatagridweb/doc/ldg-client.sh \
-    && echo 'ldg-client.sh contents:' \
-    && cat /root/ldg-client.sh \
-    && echo Installing LIGO DataGrid \
-    && bash -c ' \
-        v=1; \
-        count=1; \
-        until [ $v -eq 0 ]; do \
-            if [ $count -gt 5 ]; then \
-                echo "FIVE FAILED LDG INSTALL ATTEMPTS. GIVING UP!"; \
-                exit 1; \
-            fi; \
-            echo "LDG INSTALLATION ATTEMPT: $count"; \
-            bash /root/ldg-client.sh; \
-            v=$?; \
-            count=$((count+1)); \
-        done \
-    ' \
-    && rm -rf /var/lib/apt/lists/* \
-    && printf '\nset -o vi\n' >>/root/.bashrc \
+        libxtst6
+RUN printf '\nset -o vi\n' >>/root/.bashrc \
     && sh -l -c ' \
         git config --global user.name "LLAMA Docker Image" \
             && git config --global user.email "NA" \
