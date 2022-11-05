@@ -9,6 +9,7 @@ on:
       - v*
 jobs:
   build-and-push:
+    timeout-minutes: 60
     runs-on: ubuntu-latest
     environment: Build & Deploy
     env:
