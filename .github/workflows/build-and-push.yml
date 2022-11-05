@@ -37,7 +37,7 @@ jobs:
       -
         name: Set Environment Variables
         run: |
-          read major minor patch rest <<<$(sed 's/\./ /g;s/[^0-9 ]//g' <<<"${{ github.ref_name }})
+          read major minor patch rest <<<$(sed 's/\./ /g;s/[^0-9 ]//g' <<<'${{ github.ref_name }}')
           tag_base=py3.${{ matrix.python_minor_version }}
           tag_major=$tag_base-v$major
           tag_minor=$tag_major.$minor
