@@ -10,6 +10,7 @@ on:
 jobs:
   build-and-push:
     runs-on: ubuntu-latest
+    environment: Build & Deploy
     env:
       dockerhub_owner: stefco
       dockerhub_name: llama-base
