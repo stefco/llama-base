@@ -16,12 +16,7 @@ jobs:
       dockerhub_owner: stefco
       dockerhub_name: llama-base
       dockerfile_path: Dockerfile-deb
-      latest_tag_python_minor_version: 10
-      latest_tag_target: llama-base
-    strategy:
-      matrix:
-        python_minor_version: [10]
-        target: ['llama-base']
+      target: llama-base
     steps:
       -
         name: Set up QEMU
@@ -59,7 +54,7 @@ jobs:
         with:
           push: true
           file: ${{ env.dockerfile_path }}
-          target: ${{ matrix.target }}
+          target: ${{ env.target }}
           tags: |
             ${{ env.dockerhub_repo }}:latest
             ${{ env.dockerhub_repo }}:${{ env.dockerhub_tag_major }}
